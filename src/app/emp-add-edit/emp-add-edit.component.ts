@@ -12,13 +12,7 @@ import { EmployeeService } from '../services/employee.service';
 export class EmpAddEditComponent implements OnInit {
   empForm: FormGroup;
 
-  education: string[] = [
-    'Matric',
-    'Diploma',
-    'Intermediate',
-    'Graduate',
-    'Post Graduate',
-  ];
+
 
   constructor(
     private _fb: FormBuilder,
@@ -28,15 +22,11 @@ export class EmpAddEditComponent implements OnInit {
     private _coreService: CoreService
   ) {
     this.empForm = this._fb.group({
-      firstName: '',
-      lastName: '',
-      email: '',
-      dob: '',
-      gender: '',
-      education: '',
-      company: '',
-      experience: '',
-      package: '',
+      title:'',
+      date: '',
+      location: '',
+      description: '',
+     
     });
   }
 
@@ -59,6 +49,7 @@ export class EmpAddEditComponent implements OnInit {
             },
           });
       } else {
+          console.log("this.empForm",this.empForm)
         this._empService.addEmployee(this.empForm.value).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar('Employee added successfully');
@@ -68,7 +59,8 @@ export class EmpAddEditComponent implements OnInit {
             console.error(err);
           },
         });
-      }
+     
+    }
     }
   }
 }
